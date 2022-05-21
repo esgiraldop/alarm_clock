@@ -14,9 +14,23 @@ def main_menu():
     return ans
 
 def ask_minutes():
-    # Check whether the input is a number
-    # Check whether the number is between 1 and 5 (minutes)
-    pass
+    print('------TEMPORIZER------')
+    while True:
+        ans = input('Please input the time (Integer number, between 0 and 5 minutes): ')
+
+        try:
+            ans = int(ans)
+        except:
+            print('Please input a valid answer')
+            continue
+        else:
+            if ans < 0 or ans > 5:
+                print('Please input a number between 0 and 5')
+                continue
+
+        break
+
+    return ans
 
 def ask_datetime():
     # Check the correct format is entered (With re maybe?)
@@ -25,5 +39,5 @@ def ask_datetime():
     pass
 
 if __name__ == '__main__':
-    ans = main_menu()
-    print('Your answer is: ', ans)
+    ans = ask_minutes()
+    print('The minutes are: ', ans)
