@@ -6,7 +6,7 @@ def three_beeps(frequency, duration):
         winsound.Beep(frequency, duration)
         time.sleep((duration) / 1000)
 
-    time.sleep((duration * 2) / 1000)
+    time.sleep((duration * 5) / 1000)
 
 
 def nine_beeps():
