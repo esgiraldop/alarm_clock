@@ -1,3 +1,5 @@
+from datetime import *
+import re
 
 def main_menu():
     ans = '0'
@@ -10,6 +12,17 @@ def main_menu():
             print('Please enter a valid answer.')
 
     return ans
+
+def ask_minutes():
+    # Check whether the input is a number
+    # Check whether the number is between 1 and 5 (minutes)
+    pass
+
+def ask_datetime():
+    # Check the correct format is entered (With re maybe?)
+    # Check whether the datetime is later than the current time
+    now = now
+    pass
 
 if __name__ == '__main__':
     ans = main_menu()
