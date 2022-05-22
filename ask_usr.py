@@ -14,32 +14,68 @@ def main_menu():
 
     return ans
 
-def ask_minutes():
-    print('------TEMPORIZER------')
-    while True:
-        ans = input('Please input the time (Integer number, between 0 and 5 minutes): ')
-
-        try:
-            ans = int(ans)
-        except:
-            print('Enter a valid answer')
-            continue
-        else:
-            if ans < 0 or ans > 5:
-                print('Enter a number between 0 and 5')
-                continue
-
-        break
-
-    return ans
+# def ask_minutes():
+#     print('------TEMPORIZER------')
+#     while True:
+#         ans = input('Please input the time (Integer number, between 0 and 5 minutes): ')
+#
+#         try:
+#             ans = int(ans)
+#         except:
+#             print('Enter a valid answer')
+#             continue
+#         else:
+#             if ans < 0 or ans > 5:
+#                 print('Enter a number between 0 and 5')
+#                 continue
+#
+#         break
+#
+#     return ans
 
 def ask_timezone():
-    # For the option in which the user chooses to set the time, it must be asked first what is their timezone
-    # Ask for showing the user the supported timezones
-    pass
+
+    def display_timezones():
+        ans2 = 's'
+        while ans2 not in ['y', 'n']:
+            ans2 = input('Do you want to see the list of available timezones? (y/n): ').lower()
+
+            if ans2 not in ['y', 'n']:
+                print('Please select a valid answer')
+
+        if ans1 == 'y':
+            print('The supported timezones are:')
+            print(*pytz.all_timezones, sep='\n')
+            print('\n')
+
+    print('First, you have to select your timezone. The default timezone is "America/Bogota".')
+    ans1 = 's'
+    while ans1 not in ['y', 'n']:
+        ans1 = input('Do you want to change the timezome? (y/n): ').lower()
+
+        if ans1 not in ['y', 'n']:
+            print('Please select a valid answer')
+
+    if ans1 == 'y':
+        display_timezones()
+
+        tzone = 's'
+        while tzone not in pytz.all_timezones:
+            tzone = input('Please enter the timezone: ')
+            if tzone not in pytz.all_timezones:
+                print('Please enter a valid zone')
+                display_timezones()
+
+    else:
+        tzone = 'America/Bogota'
+
+    return tzone
 
 def ask_datetime():
     print('------ALARM------')
+    timezone = ask_timezone()  # Default timezone is 'America/Bogota'
+    timezone = pytz.timezone(timezone)
+    print('\nNext, please select the time')
     print('Supported formats for the time: "hh:mm" or "h:mm" (Military time)')
     # For practicity, only hours and minutes are allowed. This hours and minutes are parsed as being in the same day
     while True:
@@ -70,7 +106,6 @@ def ask_datetime():
                 print('Only numbers between 0 and 59 can be entered for the minutes')
             else:
                 # Time to check the time given by the user is not 'lesser' than the current time
-                timezone = pytz.timezone('America/Bogota') # Default timezone
                 now = datetime.now() # Current time
                 now_loc = timezone.localize(now)
                 usr_time = str(hour)+':'+str(minute)
@@ -88,3 +123,5 @@ def ask_datetime():
 if __name__ == '__main__':
     ans = ask_datetime()
     print('The datetime set for your alarm is: ', ans)
+    # ans = ask_timezone()
+    # print('Your timezone is: ',  ans)
