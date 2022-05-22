@@ -7,31 +7,31 @@ def main_menu():
     while ans not in ['1', '2']:
         print('Please choose an option. Do you want to:')
         print('1. Set the alarm to sound within a certain period of time (Temporizer).')
-        ans = input('2. Set the alarm to sound at given date and time: ')
+        ans = input('2. Set the alarm to sound at a given date and time: ')
 
         if ans not in ['1', '2']:
             print('Please enter a valid answer.')
 
     return ans
 
-# def ask_minutes():
-#     print('------TEMPORIZER------')
-#     while True:
-#         ans = input('Please input the time (Integer number, between 0 and 5 minutes): ')
-#
-#         try:
-#             ans = int(ans)
-#         except:
-#             print('Enter a valid answer')
-#             continue
-#         else:
-#             if ans < 0 or ans > 5:
-#                 print('Enter a number between 0 and 5')
-#                 continue
-#
-#         break
-#
-#     return ans
+def ask_minutes():
+    print('------TEMPORIZER------')
+    while True:
+        ans = input('Please input the time (Integer number, between 0 and 5 minutes): ')
+
+        try:
+            ans = int(ans)
+        except:
+            print('Enter a valid answer')
+            continue
+        else:
+            if ans < 0 or ans > 5:
+                print('Enter a number between 0 and 5')
+                continue
+
+        break
+
+    return ans
 
 def ask_timezone():
 
@@ -117,11 +117,11 @@ def ask_datetime():
 
                 break # The time is well formatted
 
-    return usr_time
+    return usr_time_loc, now_loc, timezone
 
 
 if __name__ == '__main__':
-    ans = ask_datetime()
-    print('The datetime set for your alarm is: ', ans)
-    # ans = ask_timezone()
-    # print('Your timezone is: ',  ans)
+    # ans = ask_datetime()
+    # print('The datetime set for your alarm is: ', ans)
+    ans = ask_minutes()
+    print('Your minutes are: ',  ans)
